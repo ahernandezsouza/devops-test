@@ -15,7 +15,10 @@ services:
       - ~/docker/maria_db_files:/var/lib/mysql # Use bind mount
 
   php:
-    image: wodby/drupal-php:$PHP_TAG
+    build:
+      context: drupal
+      dockerfile: Dockerfile
+#    image: wodby/drupal-php:$PHP_TAG
     container_name: "${PROJECT_NAME}_php"
     environment:
       PHP_SENDMAIL_PATH: /usr/sbin/sendmail -t -i -S mailhog:1025
@@ -101,7 +104,7 @@ services:
       APACHE_LOG_LEVEL: debug
       APACHE_BACKEND_HOST: php
       APACHE_VHOST_PRESET: php
-      APACHE_DOCUMENT_ROOT: /var/www/html/web
+      APACHE_DOCUMENT_ROOT: /var/www/html/docroot
     volumes:
       - ./:/var/www/html
 ## For macOS users (https://wodby.com/docs/stacks/drupal/local#docker-for-mac)
@@ -288,3 +291,18 @@ services:
 #    external: true
 ## For Xdebug profiler
 #  files:
+
+#  drupal:
+#    build:
+#      context: drupal
+#      dockerfile: Dockerfile
+#    volumes:
+#      - ./:/var/www/html
+#    restart: always
+
+#volumes:
+#  drupal_modules:
+#  drupal_profiles:
+#  drupal_themes:
+#  drupal_sites:
+#  db_data:
