@@ -197,7 +197,7 @@ services:
   node:
     image: wodby/node:$NODE_TAG
     container_name: "${PROJECT_NAME}_node"
-    working_dir: /var/www/html/path/to/theme/to/build
+    working_dir: /var/www/html/node_modules
     labels:
       - "traefik.http.services.${PROJECT_NAME}_node.loadbalancer.server.port=3000"
       - "traefik.http.routers.${PROJECT_NAME}_node.rule=Host(`node.${PROJECT_BASE_URL}`)"
@@ -292,17 +292,3 @@ services:
 ## For Xdebug profiler
 #  files:
 
-#  drupal:
-#    build:
-#      context: drupal
-#      dockerfile: Dockerfile
-#    volumes:
-#      - ./:/var/www/html
-#    restart: always
-
-#volumes:
-#  drupal_modules:
-#  drupal_profiles:
-#  drupal_themes:
-#  drupal_sites:
-#  db_data:
